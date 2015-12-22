@@ -52,7 +52,7 @@ module.exports = (function() {
         },// end update
         show: function (req, res) {
             User.findOne({_id: req.params.id})
-            .populate('bucketItems')
+            .deepPopulate('bucketItems._user')
             .exec(function (err, populatedUser) {
                 if (err) {
                     res.json(err);

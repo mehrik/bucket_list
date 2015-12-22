@@ -3,7 +3,6 @@
     <a href="#/">Logout</a>
 </nav>
 
-{{UC.displayUser}}
 <h1>{{UC.displayUser.name}}'s Bucket List</h1>
 
 
@@ -13,11 +12,15 @@
 
 
 <!-- make checklisted items disabled if displayUser != currentUser -->
-bucketlist items:
-<ul ng-repeat='bucketItem in UC.displayUser.bucketItems'>
-    <li>
-        {{bucketItem.title}} -
-        {{bucketItem.description}} -
-        {{bucketItem.created_at}}
-    </li>
-</ul>
+<h3>bucketlist items:</h3>
+
+<div id='BucketListItems'>
+    <label ng-repeat="bucketItem in UC.displayUser.bucketItems">
+    <input type='checkbox' ng-checked="bucketItem.status != 'pending'" ng-change='UC.statusChange(bucketItem)' ng-model='bucketItem.change' ng-disabled="bucketItem._user != UC.currentUser._id">
+    {{bucketItem._user}} |
+    {{bucketItem.title}} -
+    {{bucketItem.description}} -
+    {{bucketItem.created_at}}
+    {{bucketItem.status}}
+    </label>
+</div>

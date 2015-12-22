@@ -28,6 +28,7 @@ myApp.controller('BucketItemsController', function ($location, $routeParams, Use
     // person's bucket list
     this.createBucketItem = function () {
         var taggedUser = _this.newBucketItem.taggedUser;
+        _this.newBucketItem._user = _this.currentUser;
         BucketItemFactory.create(_this.newBucketItem, function (data) {
             // Take newly created bucketItem and update user who created it
             UserFactory.update(_this.currentUser, data, function () {});
@@ -36,6 +37,13 @@ myApp.controller('BucketItemsController', function ($location, $routeParams, Use
                 UserFactory.update(taggedUser, data, function () {})
             }
             _this.newBucketItem = {};
+            _this.index();
+        });
+    }
+
+    this.statusChange = function (bucketItem) {
+        BucketItemFactory.update(bucketItem, function () {
+            _this.index();
         });
     }
 

@@ -7,32 +7,48 @@
 <h1>Welcome, {{BIC.currentUser.name}}</h1>
 
 <!-- Create a new bucket item -->
-<form>
-    <input type='text' placeholder='Title' ng-model='BIC.newBucketItem.title'>
-    <input type='text' placeholder='Description' ng-model='BIC.newBucketItem.description'>
+<form name='newBucketForm'>
+    <input type='text' placeholder='Title' ng-model='BIC.newBucketItem.title' minlength=5 name='title' required>
+    <input type='text' placeholder='Description' ng-model='BIC.newBucketItem.description' minlength=10 name='description' required>
     <!-- index of all other users -->
     <select ng-options='user as user.name for user in BIC.users' ng-model='BIC.newBucketItem.taggedUser'>
         <!-- allowed to select a null item -->
         <option value=""> -- Tag a friend! (optional) -- </option>
     </select>
     <button ng-click='BIC.createBucketItem()'>Add to list</button>
+    <!-- error messages -->
+    <!-- title error -->
+    <div ng-messages="newBucketForm.name.$error" role='alert'>
+        <div ng-message='minlength'>Title must be at least 5 characters long</div>
+        <div ng-message='required'>Title field is required</div>
+    </div>
+    <!-- description error -->
+    <div ng-messages="newBucketForm.name.$error" role='alert'>
+        <div ng-message='minlength'>Title must be at least 10 characters long</div>
+        <div ng-message='required'>Description field is required</div>
+    </div>
 </form>
+
+
+<div
 
 <!-- checklist of bucketlist items for the logged in user -->
 <!-- for the checking, make it so on check, it will update the database -->
 <div id='personBucketListItems'>
     Before I die, I want to...
     <label ng-repeat="bucketItem in BIC.currentUser.bucketItems">
-    <input type='checkbox'>
+    <input type='checkbox' ng-checked="bucketItem.status != 'pending'" ng-change='BIC.statusChange(bucketItem)' ng-model='bucketItem.change'>
+    {{bucketItem._user}} |
     {{bucketItem.title}} -
     {{bucketItem.description}} -
     {{bucketItem.created_at}}
+    {{bucketItem.status}}
     </label>
 </div>
 
 <!-- index of all users, except for current user -->
 <div id='listOfUsers'>
-    <p>List of logged users(Click to view profile)</p>
+    <h4>List of logged users(Click to view profile)</h4>
     <div class='user' ng-repeat='user in BIC.users'>
         <a ng-href="#/user/{{user._id}}">{{ user.name }}</a>
     </div>

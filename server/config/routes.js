@@ -18,5 +18,6 @@ module.exports = function(app) {
 
     // update user if user is tagged
     app.post('/user/:id', user.update);
+    app.post('/bucketItem/:id', bucketItem.update);
 
 }
