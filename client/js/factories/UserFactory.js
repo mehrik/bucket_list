@@ -37,9 +37,9 @@ myApp.factory('UserFactory', function ($http) {
     }
 
     factory.update = function (user, bucketItem, callback) {
-        // console.log(user)
         $http.post('/user/'+user._id, bucketItem).success(function (output) {
             if(!output.errors) {
+                console.log(output);
                 callback();
             } else {
                 console.log('You have errors', output);

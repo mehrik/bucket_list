@@ -21,7 +21,7 @@ module.exports = (function() {
                 if (err) {
                     res.json(err);
                 } else if (existingUser) {
-                    console.log('User found!', existingUser);
+                    // console.log('User found!', existingUser);
                     res.json(existingUser);
                 } else if (!existingUser) {
                     console.log('Creating new user!');
@@ -38,6 +38,7 @@ module.exports = (function() {
         },// end create
         // Insert bucket item into list
         update: function (req, res) {
+            console.log(req.body);
             User.findOneAndUpdate(
                 {_id: req.params.id},
                 { $push: {bucketItems: req.body} },
