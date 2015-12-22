@@ -1,0 +1,23 @@
+<nav>
+    <a href="#/dashboard">Home</a> |
+    <a href="#/">Logout</a>
+</nav>
+
+{{UC.displayUser}}
+<h1>{{UC.displayUser.name}}'s Bucket List</h1>
+
+
+<h3>Done</h3>
+
+<h3>Pending</h3>
+
+
+<!-- make checklisted items disabled if displayUser != currentUser -->
+bucketlist items:
+<ul ng-repeat='bucketItem in UC.displayUser.bucketItems'>
+    <li>
+        {{bucketItem.title}} -
+        {{bucketItem.description}} -
+        {{bucketItem.created_at}}
+    </li>
+</ul>

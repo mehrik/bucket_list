@@ -6,8 +6,12 @@ myApp.factory('UserFactory', function ($http) {
 
     factory.index = function (callback) {
         $http.get('/user').success(function (output) {
-            _UF.users = output;
-            callback(_UF.users);
+            if(!output.errors) {
+                _UF.users = output;
+                callback(_UF.users);
+            } else {
+                console.log('error has occured');
+            }
         });
     }
 
@@ -27,9 +31,30 @@ myApp.factory('UserFactory', function ($http) {
         });
     };
 
+    // Send back currently logged in user to controller
     factory.getCurrentUser = function (callback) {
-        console.log('THis is the current USERRRR', _UF.currentUser);
         callback(_UF.currentUser);
+    }
+
+    factory.update = function (user, bucketItem, callback) {
+        // console.log(user)
+        $http.post('/user/'+user._id, bucketItem).success(function (output) {
+            if(!output.errors) {
+                callback();
+            } else {
+                console.log('You have errors', output);
+            }// end if
+        });// end $http.post
+    }// end update
+
+    factory.show = function (userId, callback) {
+        $http.get('/user/'+userId).success(function (output) {
+            if(!output.errors) {
+                callback(output);
+            } else {
+                console.log('You have errors', output);
+            }// end if
+        });
     }
 
     return factory;

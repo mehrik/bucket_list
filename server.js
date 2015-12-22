@@ -8,10 +8,10 @@ require('./server/config/mongoose.js');
 // require routes.js config
 require('./server/config/routes.js')(app);
 
-app.listen(5000, function() {
+app.listen(8000, function() {
     console.log("    //////////////");
     console.log("   ////      ////");
-    console.log("  //// 5000 ////");
+    console.log("  //// 8000 ////");
     console.log(" ////      ////");
     console.log("//////////////");
 })

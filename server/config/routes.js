@@ -14,7 +14,7 @@ module.exports = function(app) {
     app.post('/bucketItem', bucketItem.create);
 
     // show one user
-    app.get('/user/:id', user.showOne);
+    app.get('/user/:id', user.show);
 
     // update user if user is tagged
     app.post('/user/:id', user.update);

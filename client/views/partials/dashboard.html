@@ -1,4 +1,8 @@
-<nav>hello</nav>
+<nav>
+    <a ng-href="#/user/{{BIC.currentUser._id}}">Bucket List</a> |
+    <a href="#/dashboard">Home</a> |
+    <a href="#/">Logout</a>
+</nav>
 
 <h1>Welcome, {{BIC.currentUser.name}}</h1>
 
@@ -7,23 +11,29 @@
     <input type='text' placeholder='Title' ng-model='BIC.newBucketItem.title'>
     <input type='text' placeholder='Description' ng-model='BIC.newBucketItem.description'>
     <!-- index of all other users -->
-    <select>
-        <option>name</option>
-        <option>2</option>
-        <option>Placeholder</option>
+    <select ng-options='user as user.name for user in BIC.users' ng-model='BIC.newBucketItem.taggedUser'>
+        <!-- allowed to select a null item -->
+        <option value=""> -- Tag a friend! (optional) -- </option>
     </select>
-    <button>Add to list</button>
+    <button ng-click='BIC.createBucketItem()'>Add to list</button>
 </form>
 
 <!-- checklist of bucketlist items for the logged in user -->
+<!-- for the checking, make it so on check, it will update the database -->
 <div id='personBucketListItems'>
-    
+    Before I die, I want to...
+    <label ng-repeat="bucketItem in BIC.currentUser.bucketItems">
+    <input type='checkbox'>
+    {{bucketItem.title}} -
+    {{bucketItem.description}} -
+    {{bucketItem.created_at}}
+    </label>
 </div>
 
 <!-- index of all users, except for current user -->
 <div id='listOfUsers'>
     <p>List of logged users(Click to view profile)</p>
     <div class='user' ng-repeat='user in BIC.users'>
-        <a href="#">{{ user.name }}</a>
+        <a ng-href="#/user/{{user._id}}">{{ user.name }}</a>
     </div>
 </div>
