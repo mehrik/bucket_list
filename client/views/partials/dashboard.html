@@ -37,7 +37,7 @@
 <div id='personBucketListItems'>
     Before I die, I want to...
     <label ng-repeat="bucketItem in BIC.currentUser.bucketItems">
-    <input type='checkbox' ng-checked="bucketItem.status != 'pending'" ng-change='BIC.statusChange(bucketItem)' ng-model='bucketItem.change'>
+    <input type='checkbox' ng-checked="bucketItem.status != 'pending'" ng-change='BIC.statusChange(bucketItem)' ng-model='bucketItem.change' ng-disabled="bucketItem._user != BIC.currentUser._id">
     {{bucketItem._user}} |
     {{bucketItem.title}} -
     {{bucketItem.description}} -
