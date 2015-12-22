@@ -1,0 +1,29 @@
+<nav>hello</nav>
+
+<h1>Welcome, {{BIC.currentUser.name}}</h1>
+
+<!-- Create a new bucket item -->
+<form>
+    <input type='text' placeholder='Title' ng-model='BIC.newBucketItem.title'>
+    <input type='text' placeholder='Description' ng-model='BIC.newBucketItem.description'>
+    <!-- index of all other users -->
+    <select>
+        <option>name</option>
+        <option>2</option>
+        <option>Placeholder</option>
+    </select>
+    <button>Add to list</button>
+</form>
+
+<!-- checklist of bucketlist items for the logged in user -->
+<div id='personBucketListItems'>
+    
+</div>
+
+<!-- index of all users, except for current user -->
+<div id='listOfUsers'>
+    <p>List of logged users(Click to view profile)</p>
+    <div class='user' ng-repeat='user in BIC.users'>
+        <a href="#">{{ user.name }}</a>
+    </div>
+</div>
